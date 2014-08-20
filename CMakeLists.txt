@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(armadillo_matrix)
-
-find_package(catkin REQUIRED COMPONENTS roscpp)
+find_package(catkin REQUIRED)
 
 ################################################
 #                                              #
@@ -10,8 +9,9 @@ find_package(catkin REQUIRED COMPONENTS roscpp)
 ################################################
 
 catkin_package(
-    LIBRARIES armadillo
     INCLUDE_DIRS include
+    LIBRARIES armadillo
+#    DEPENDS lapack blas
 )
 
 ################################################
@@ -23,4 +23,5 @@ catkin_package(
 include_directories(include)
 
 add_library(armadillo src/wrap_libs.cpp)
+#target_link_libraries(armadillo lapack blas)
 
