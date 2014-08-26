@@ -8,10 +8,16 @@ find_package(catkin REQUIRED)
 #                                              #
 ################################################
 
+find_package(LAPACK REQUIRED)
+find_package(BLAS REQUIRED)
+
+message("LAPACK_LIBRARIES" ${LAPACK_LIBRARIES})
+message("BLAS_LIBRARIES" ${BLAS_LIBRARIES})
+
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES armadillo
-  DEPENDS lapack blas
+  DEPENDS LAPACK BLAS
 )
 
 ################################################
@@ -23,4 +29,7 @@ catkin_package(
 include_directories(include)
 
 add_library(armadillo src/wrap_libs.cpp)
-target_link_libraries(armadillo lapack blas)
+target_link_libraries(armadillo
+  ${LAPACK_LIBRARIES}
+  ${BLAS_LIBRARIES}
+)
